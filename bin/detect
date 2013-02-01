@@ -1,9 +1,5 @@
 #!/bin/sh
 # bin/detect <build-dir>
 
-if [ -f $1/haproxy.cfg ]; then
-  echo "HaProxy"
-  exit 0
-else
-  exit 1
-fi
+echo "HaProxy"
+exit 0
