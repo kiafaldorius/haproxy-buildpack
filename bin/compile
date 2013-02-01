@@ -12,7 +12,7 @@ get_source() {
   if [ ! -d $CACHE_DIR ]; then
     echo "Creating $CACHE_DIR"
     mkdir $CACHE_DIR
-  end
+  fi
 
 
   if [ -e $CACHE_DIR/$ARCHIVE ]; then
