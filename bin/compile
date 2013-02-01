@@ -34,7 +34,8 @@ compile_source() {
   unpack_source
   if [ ! -f $CACHE_DIR/$ARCHIVE_DIR/haproxy ]; then
     echo "Compiling $ARCHIVE_DIR..."
-    `cd $CACHE_DIR/$ARCHIVE_DIR; make TARGET=linux2628`
+    cd $CACHE_DIR/$ARCHIVE_DIR
+    make TARGET=linux2628
   fi
 }
 
