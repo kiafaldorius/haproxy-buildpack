@@ -1,0 +1,45 @@
+#!/bin/bash
+# bin/compile <build-dir> <cache-dir>
+
+BUILD_DIR=$1
+CACHE_DIR=$2
+VERSION_DIR=`cd $(dirname $0); cd ..; pwd`
+VERSION=`cat $VERSION_DIR/VERSION | sed 's/[\r\n]*$//'`
+ARCHIVE=`basename $VERSION`
+ARCHIVE_DIR=`echo $ARCHIVE | sed 's/\.tar\.gz$//'`
+
+get_source() {
+  if [ -e $CACHE_DIR/$ARCHIVE ]; then
+    echo "Don't need to download, already exists"
+  else
+    echo "Downloading $VERSION..."
+    curl $VERSION -o $CACHE_DIR/$ARCHIVE
+  fi
+}
+
+unpack_source() {
+  if [ ! -d $CACHE_DIR/$ARCHIVE_DIR ]; then
+    echo "Unpacking..."
+    `tar xzf $CACHE_DIR/$ARCHIVE -C $CACHE_DIR`
+  fi
+}
+
+compile_source() {
+  unpack_source
+  if [ ! -f $CACHE_DIR/$ARCHIVE_DIR/haproxy ]; then
+    echo "Compiling $ARCHIVE_DIR..."
+    `cd $CACHE_DIR/$ARCHIVE_DIR; make TARGET=linux2628`
+  fi
+}
+
+vendor_bin() {
+  cp $CACHE_DIR/$ARCHIVE_DIR/haproxy $BUILD_DIR/haproxy
+}
+
+get_source
+compile_source
+vendor_bin
+
+echo "-----> Done."
+
+exit 0
