@@ -9,6 +9,12 @@ ARCHIVE=`basename $VERSION`
 ARCHIVE_DIR=`echo $ARCHIVE | sed 's/\.tar\.gz$//'`
 
 get_source() {
+  if [ ! -d $CACHE_DIR ]; then
+    echo "Creating $CACHE_DIR"
+    mkdir $CACHE_DIR
+  end
+
+
   if [ -e $CACHE_DIR/$ARCHIVE ]; then
     echo "Don't need to download, already exists"
   else
