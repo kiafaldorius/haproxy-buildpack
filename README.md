@@ -18,4 +18,6 @@ You have an AwesomeApp at www.example.com and AwesomeApp has an API at api.examp
 
 # Usage
 
-This buildpack compiles and generates a haproxy binary in your app's root directory. You are encouraged to fork this repository and edit it to your needs (particularly the VERSION file that points to the haproxy archive that you want to compile/install).
+This buildpack compiles and generates a haproxy binary in your app's root directory.
+
+You are encouraged to fork this repository and edit it to your needs (particularly the VERSION file that points to the haproxy archive that you want to compile/install). You should then use the link to your fork and changes as the BUILDPACK_URL on heroku rather than this one. (It's for your own good; I'm not liable for any changes that I may make to this repository in the future.)
